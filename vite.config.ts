@@ -20,6 +20,7 @@ export default defineConfig({
   base: '/vision-monitor-dashboard/',
   build: {
     rollupOptions: {
+      input: path.resolve(__dirname, 'src/main.tsx'),
       output: {
         entryFileNames: 'assets/app.js',
         chunkFileNames: 'assets/chunks/[name].js',
