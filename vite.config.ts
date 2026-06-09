@@ -18,6 +18,15 @@ function figmaAssetResolver() {
 
 export default defineConfig({
   base: '/vision-monitor-dashboard/',
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/app.js',
+        chunkFileNames: 'assets/chunks/[name].js',
+        assetFileNames: 'assets/[name][extname]',
+      },
+    },
+  },
   plugins: [
     figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if
