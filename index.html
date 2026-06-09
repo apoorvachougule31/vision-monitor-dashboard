@@ -24,16 +24,7 @@
 
   <body>
     <div id="root"></div>
-    <script type="module">
-      const isGithubPages = location.hostname.endsWith('github.io')
-      const githubPagesBundle = '/vision-monitor-dashboard/assets/app-5e65b04.js'
-
-      if (isGithubPages) {
-        import(githubPagesBundle)
-      } else {
-        import('/src/main.tsx')
-      }
-    </script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
   
