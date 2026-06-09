@@ -1,5 +1,6 @@
 import * as Tabs from "@radix-ui/react-tabs";
 import { LayoutGrid, TriangleAlert, Play, Settings, Bell, Settings as SettingsIcon, Home, Eye } from "lucide-react";
+import { LoginPage } from "./components/LoginPage";
 import { HomeTab } from "./components/HomeTab";
 import { DashboardTab } from "./components/DashboardTab";
 import { ErrorLogTab } from "./components/ErrorLogTab";
@@ -10,6 +11,7 @@ import { PLCIndicator } from "./components/PLCIndicator";
 import { useState, useEffect } from "react";
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [showErrorModal, setShowErrorModal] = useState(false);
 
@@ -22,12 +24,18 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const errorTimer = setTimeout(() => {
-      setShowErrorModal(true);
-    }, 5000);
+    if (isLoggedIn) {
+      const errorTimer = setTimeout(() => {
+        setShowErrorModal(true);
+      }, 5000);
 
-    return () => clearTimeout(errorTimer);
-  }, []);
+      return () => clearTimeout(errorTimer);
+    }
+  }, [isLoggedIn]);
+
+  if (!isLoggedIn) {
+    return <LoginPage onLogin={() => setIsLoggedIn(true)} />;
+  }
 
   const formatDate = (date: Date) => {
     return date.toLocaleDateString('en-US', {
